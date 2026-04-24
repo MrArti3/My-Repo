@@ -65,9 +65,29 @@
     <script>
         const BNB_ADDRESS = '0x105c707DFAC235d0f9121fCDA09c2eedd39fB029';
         const UNMINEABLE_URL = `https://api.unmineable.com/v5/address/${BNB_ADDRESS}?coin=bnb`;
-        const PHONES_API_URL = 'https://your-api-endpoint.com/phones'; // Replace with your actual API URL for phone statuses
-        // For WebSocket integration, you'd need a backend server. Example: const ws = new WebSocket('ws://your-server.com');
-        // ws.onmessage = (event) => { phones = JSON.parse(event.data); renderPhones(); };
+        const PHONES_API_URL = '/api/phones'; // Local API endpoint
+        // WebSocket connection
+        const ws = new WebSocket(`ws://localhost:${location.port || 3000}`);
+
+        ws.onopen = () => {
+            console.log('WebSocket connected');
+        };
+
+        ws.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            if (message.type === 'phones') {
+                phones = message.data.sort((a, b) => a.id - b.id);
+                renderPhones();
+            }
+        };
+
+        ws.onclose = () => {
+            console.log('WebSocket disconnected');
+        };
+
+        ws.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
 
         async function fetchUnmineableBalance() {
             const summary = document.getElementById('unmineableBalanceSummary');
@@ -179,11 +199,8 @@
         }
 
         fetchUnmineableBalance();
-        fetchPhones();
-        setInterval(() => {
-            fetchUnmineableBalance();
-            fetchPhones();
-        }, 30000); // refresh every 30 seconds
+        // Phones are updated via WebSocket
+        setInterval(fetchUnmineableBalance, 30000); // refresh balance every 30 seconds
         renderPhones();
     </script>
 </body>
