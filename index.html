@@ -1,1 +1,133 @@
-<H1> hello goodwall </H1>h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Farm Monitor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .phone-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .phone-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+        }
+        .phone-card h2 {
+            margin-top: 0;
+        }
+        .status {
+            font-weight: bold;
+        }
+        .online {
+            color: green;
+        }
+        .offline {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Phone Farm Monitor</h1>
+    <div class="phone-list" id="phoneList">
+        <!-- Phones will be added here by JavaScript -->
+    </div>
+
+    <script>
+        const phones = [
+            { id: 1, ip: '100.104.201.128', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
+            { id: 10, ip: '100.74.181.105', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 11, ip: '100.124.154.23', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 12, ip: '100.76.17.96', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 13, ip: '100.106.9.40', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 14, ip: '100.83.93.110', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 15, ip: '100.127.141.118', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 16, ip: '100.100.106.56', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 17, ip: '100.72.90.121', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 18, ip: '100.82.158.5', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
+            { id: 19, ip: '100.84.209.57', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
+            { id: 2, ip: '100.118.16.3', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 20, ip: '100.104.253.84', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 21, ip: '100.88.206.53', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 22, ip: '100.67.13.45', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 23, ip: '100.92.236.61', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 24, ip: '100.117.147.55', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
+            { id: 25, ip: '100.88.214.19', version: '1.92.3', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-04-12') },
+            { id: 26, ip: '100.123.182.21', version: '1.92.2', android: 'Android 10', status: 'online', lastSeen: new Date() },
+            { id: 27, ip: '100.104.178.88', version: '1.92.3', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-04-01') },
+            { id: 28, ip: '100.78.166.6', version: '1.96.2', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-03-30') },
+            { id: 29, ip: '100.69.228.93', version: '1.96.2', android: 'Android 11', status: 'online', lastSeen: new Date() },
+            { id: 3, ip: '100.67.94.55', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 30, ip: '100.94.69.51', version: '1.96.2', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-03-30') },
+            { id: 31, ip: '100.71.150.59', version: '1.96.4', android: 'Android 10', status: 'online', lastSeen: new Date() },
+            { id: 32, ip: '100.87.213.67', version: '1.96.4', android: 'Android 10', status: 'offline', lastSeen: new Date('2024-04-06') },
+            { id: 33, ip: '100.84.102.30', version: '1.96.4', android: 'Android 10', status: 'online', lastSeen: new Date() },
+            { id: 34, ip: '100.70.179.36', version: '1.96.4', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-03-30') },
+            { id: 4, ip: '100.93.236.122', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 5, ip: '100.101.96.110', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
+            { id: 6, ip: '100.86.8.29', version: '1.94.2', android: 'Android 14', status: 'offline', lastSeen: new Date('2024-04-04') },
+            { id: 7, ip: '100.68.153.7', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 8, ip: '100.76.109.63', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
+            { id: 9, ip: '100.121.125.16', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() }
+        ];
+
+        function renderPhones() {
+            const phoneList = document.getElementById('phoneList');
+            phoneList.innerHTML = '';
+            phones.forEach(phone => {
+                const card = document.createElement('div');
+                card.className = 'phone-card';
+                card.innerHTML = `
+                    <h2>Phone ${phone.id}</h2>
+                    <p><strong>IP:</strong> ${phone.ip}</p>
+                    <p><strong>Version:</strong> ${phone.version}</p>
+                    <p><strong>Android:</strong> ${phone.android}</p>
+                    <p class="status ${phone.status}">${phone.status.toUpperCase()}</p>
+                    <p>Last Seen: ${phone.lastSeen.toLocaleDateString()} ${phone.lastSeen.toLocaleTimeString()}</p>
+                `;
+                phoneList.appendChild(card);
+            });
+        }
+
+        // Simulate updates - for online phones, update lastSeen
+        setInterval(() => {
+            phones.forEach(phone => {
+                if (phone.status === 'online') {
+                    phone.lastSeen = new Date();
+                }
+            });
+            renderPhones();
+        }, 60000); // Update every minute
+
+        renderPhones();
+    </script>
+                    phone.battery = Math.max(0, phone.battery - Math.floor(Math.random() * 5));
+                    if (phone.battery < 20) {
+                        phone.status = 'offline';
+                    }
+                }
+                phone.lastSeen = new Date();
+            });
+            renderPhones();
+        }, 10000); // Update every 10 seconds
+
+        renderPhones();
+    </script>
+</body>
+</html>
