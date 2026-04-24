@@ -65,6 +65,9 @@
     <script>
         const BNB_ADDRESS = '0x105c707DFAC235d0f9121fCDA09c2eedd39fB029';
         const UNMINEABLE_URL = `https://api.unmineable.com/v5/address/${BNB_ADDRESS}?coin=bnb`;
+        const PHONES_API_URL = 'https://your-api-endpoint.com/phones'; // Replace with your actual API URL for phone statuses
+        // For WebSocket integration, you'd need a backend server. Example: const ws = new WebSocket('ws://your-server.com');
+        // ws.onmessage = (event) => { phones = JSON.parse(event.data); renderPhones(); };
 
         async function fetchUnmineableBalance() {
             const summary = document.getElementById('unmineableBalanceSummary');
@@ -94,7 +97,26 @@
             }
         }
 
-        const phones = [
+        async function fetchPhones() {
+            try {
+                const response = await fetch(PHONES_API_URL);
+                if (!response.ok) {
+                    throw new Error(`Phones API error ${response.status}`);
+                }
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    phones = data.sort((a, b) => a.id - b.id);
+                    renderPhones();
+                } else {
+                    throw new Error('Invalid phones data');
+                }
+            } catch (error) {
+                console.error('Failed to fetch phone statuses:', error);
+                // Keep current phones if fetch fails
+            }
+        }
+
+        let phones = [
             { id: 1, ip: '100.104.201.128', status: 'online' },
             { id: 2, ip: '100.118.16.3', status: 'online' },
             { id: 3, ip: '100.67.94.55', status: 'online' },
@@ -157,7 +179,11 @@
         }
 
         fetchUnmineableBalance();
-        setInterval(fetchUnmineableBalance, 30000); // refresh every 30 seconds
+        fetchPhones();
+        setInterval(() => {
+            fetchUnmineableBalance();
+            fetchPhones();
+        }, 30000); // refresh every 30 seconds
         renderPhones();
     </script>
 </body>
