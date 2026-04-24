@@ -84,8 +84,7 @@
 
                 const data = await response.json();
                 if (data.success && data.data) {
-                    const now = new Date().toLocaleTimeString();
-                    summary.textContent = `Balance: ${data.data.balance_payable} BNB (updated ${now})`;
+                    summary.textContent = `BNB Balance: ${data.data.balance_payable}`;
                 } else {
                     throw new Error(data.msg || 'Invalid Unmineable response');
                 }
