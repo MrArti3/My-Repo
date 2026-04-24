@@ -41,6 +41,11 @@
         .offline {
             color: red;
         }
+        .summary {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 1rem;
+        }
         .balance-summary {
             text-align: center;
             font-size: 1.1rem;
@@ -51,6 +56,7 @@
 </head>
 <body>
     <h1>Phone Farm Monitor</h1>
+    <div class="summary" id="phoneSummary">Loading phone summary...</div>
     <div class="balance-summary" id="unmineableBalanceSummary">Loading Unmineable balance...</div>
     <div class="phone-list" id="phoneList">
         <!-- Phones will be added here by JavaScript -->
@@ -78,7 +84,8 @@
 
                 const data = await response.json();
                 if (data.success && data.data) {
-                    summary.textContent = `Balance: ${data.data.balance_payable} BNB`;
+                    const now = new Date().toLocaleTimeString();
+                    summary.textContent = `Balance: ${data.data.balance_payable} BNB (updated ${now})`;
                 } else {
                     throw new Error(data.msg || 'Invalid Unmineable response');
                 }
@@ -141,6 +148,13 @@
                 `;
                 phoneList.appendChild(card);
             });
+
+            // Update summary
+            const total = phones.length;
+            const online = phones.filter(p => p.status === 'online').length;
+            const offline = total - online;
+            const summary = document.getElementById('phoneSummary');
+            summary.textContent = `Total: ${total} | Online: ${online} | Offline: ${offline}`;
         }
 
         fetchUnmineableBalance();
