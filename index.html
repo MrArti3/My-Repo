@@ -51,40 +51,40 @@
 
     <script>
         const phones = [
-            { id: 1, ip: '100.104.201.128', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
-            { id: 10, ip: '100.74.181.105', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 11, ip: '100.124.154.23', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 12, ip: '100.76.17.96', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 13, ip: '100.106.9.40', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 14, ip: '100.83.93.110', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 15, ip: '100.127.141.118', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 16, ip: '100.100.106.56', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 17, ip: '100.72.90.121', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 18, ip: '100.82.158.5', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
-            { id: 19, ip: '100.84.209.57', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
-            { id: 2, ip: '100.118.16.3', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 20, ip: '100.104.253.84', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 21, ip: '100.88.206.53', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 22, ip: '100.67.13.45', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 23, ip: '100.92.236.61', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 24, ip: '100.117.147.55', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
-            { id: 25, ip: '100.88.214.19', version: '1.92.3', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-04-12') },
-            { id: 26, ip: '100.123.182.21', version: '1.92.2', android: 'Android 10', status: 'online', lastSeen: new Date() },
-            { id: 27, ip: '100.104.178.88', version: '1.92.3', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-04-01') },
-            { id: 28, ip: '100.78.166.6', version: '1.96.2', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-03-30') },
-            { id: 29, ip: '100.69.228.93', version: '1.96.2', android: 'Android 11', status: 'online', lastSeen: new Date() },
-            { id: 3, ip: '100.67.94.55', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 30, ip: '100.94.69.51', version: '1.96.2', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-03-30') },
-            { id: 31, ip: '100.71.150.59', version: '1.96.4', android: 'Android 10', status: 'online', lastSeen: new Date() },
-            { id: 32, ip: '100.87.213.67', version: '1.96.4', android: 'Android 10', status: 'offline', lastSeen: new Date('2024-04-06') },
-            { id: 33, ip: '100.84.102.30', version: '1.96.4', android: 'Android 10', status: 'online', lastSeen: new Date() },
-            { id: 34, ip: '100.70.179.36', version: '1.96.4', android: 'Android 11', status: 'offline', lastSeen: new Date('2024-03-30') },
-            { id: 4, ip: '100.93.236.122', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 5, ip: '100.101.96.110', version: '1.94.2', android: 'Android 13', status: 'online', lastSeen: new Date() },
-            { id: 6, ip: '100.86.8.29', version: '1.94.2', android: 'Android 14', status: 'offline', lastSeen: new Date('2024-04-04') },
-            { id: 7, ip: '100.68.153.7', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 8, ip: '100.76.109.63', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() },
-            { id: 9, ip: '100.121.125.16', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() }
+            { id: 1, ip: '100.104.201.128', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 2, ip: '100.118.16.3', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 3, ip: '100.67.94.55', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 4, ip: '100.93.236.122', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 5, ip: '100.101.96.110', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 6, ip: '100.86.8.29', version: '1.94.2', status: 'offline', lastSeen: new Date('2024-04-04'), temp: 0 },
+            { id: 7, ip: '100.68.153.7', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 8, ip: '100.76.109.63', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 9, ip: '100.121.125.16', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 10, ip: '100.74.181.105', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 11, ip: '100.124.154.23', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 12, ip: '100.76.17.96', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 13, ip: '100.106.9.40', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 14, ip: '100.83.93.110', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 15, ip: '100.127.141.118', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 16, ip: '100.100.106.56', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 17, ip: '100.72.90.121', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 18, ip: '100.82.158.5', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 19, ip: '100.84.209.57', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 20, ip: '100.104.253.84', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 21, ip: '100.88.206.53', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 22, ip: '100.67.13.45', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 23, ip: '100.92.236.61', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 24, ip: '100.117.147.55', version: '1.94.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 25, ip: '100.88.214.19', version: '1.92.3', status: 'offline', lastSeen: new Date('2024-04-12'), temp: 0 },
+            { id: 26, ip: '100.123.182.21', version: '1.92.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 27, ip: '100.104.178.88', version: '1.92.3', status: 'offline', lastSeen: new Date('2024-04-01'), temp: 0 },
+            { id: 28, ip: '100.78.166.6', version: '1.96.2', status: 'offline', lastSeen: new Date('2024-03-30'), temp: 0 },
+            { id: 29, ip: '100.69.228.93', version: '1.96.2', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 30, ip: '100.94.69.51', version: '1.96.2', status: 'offline', lastSeen: new Date('2024-03-30'), temp: 0 },
+            { id: 31, ip: '100.71.150.59', version: '1.96.4', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 32, ip: '100.87.213.67', version: '1.96.4', status: 'offline', lastSeen: new Date('2024-04-06'), temp: 0 },
+            { id: 33, ip: '100.84.102.30', version: '1.96.4', status: 'online', lastSeen: new Date(), temp: Math.floor(Math.random() * 20) + 30 },
+            { id: 34, ip: '100.70.179.36', version: '1.96.4', status: 'offline', lastSeen: new Date('2024-03-30'), temp: 0 }
         ];
 
         // Sort phones by ID
@@ -100,7 +100,7 @@
                     <h2>Phone ${phone.id}</h2>
                     <p><strong>IP:</strong> ${phone.ip}</p>
                     <p><strong>Version:</strong> ${phone.version}</p>
-                    <p><strong>Android:</strong> ${phone.android}</p>
+                    <p><strong>Temperature:</strong> ${phone.temp}°C</p>
                     <p class="status ${phone.status}">${phone.status.toUpperCase()}</p>
                     <p>Last Seen: ${phone.lastSeen.toLocaleDateString()} ${phone.lastSeen.toLocaleTimeString()}</p>
                 `;
