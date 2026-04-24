@@ -87,6 +87,9 @@
             { id: 9, ip: '100.121.125.16', version: '1.94.2', android: 'Android 12', status: 'online', lastSeen: new Date() }
         ];
 
+        // Sort phones by ID
+        phones.sort((a, b) => a.id - b.id);
+
         function renderPhones() {
             const phoneList = document.getElementById('phoneList');
             phoneList.innerHTML = '';
@@ -113,7 +116,7 @@
                 }
             });
             renderPhones();
-        }, 60000); // Update every minute
+        }, 10000); // Update every 10 seconds
 
         renderPhones();
     </script>
