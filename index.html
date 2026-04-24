@@ -51,54 +51,43 @@
 </head>
 <body>
     <h1>Phone Farm Monitor</h1>
-    <div class="balance-summary" id="balanceSummary">Loading BNB balance...</div>
+    <div class="balance-summary" id="unmineableBalanceSummary">Loading Unmineable balance...</div>
+    <div class="balance-summary">
+        <a href="https://unmineable.com/address/0x105c707DFAC235d0f9121fCDA09c2eedd39fB029" target="_blank">View on Unmineable</a>
+    </div>
     <div class="phone-list" id="phoneList">
         <!-- Phones will be added here by JavaScript -->
     </div>
 
     <script>
         const BNB_ADDRESS = '0x105c707DFAC235d0f9121fCDA09c2eedd39fB029';
-        const BSC_RPC_URL = 'https://bsc-dataseed.binance.org/';
+        const UNMINEABLE_URL = `https://api.unmineable.com/v5/address/${BNB_ADDRESS}?coin=bnb`;
 
-        function weiToBnb(weiHex) {
-            const wei = BigInt(weiHex);
-            const whole = wei / 1000000000000000000n;
-            const fraction = wei % 1000000000000000000n;
-            const fractionStr = fraction.toString().padStart(18, '0').slice(0, 6);
-            return `${whole.toString()}.${fractionStr}`;
-        }
-
-        async function fetchBnbBalance() {
-            const balanceSummary = document.getElementById('balanceSummary');
-            balanceSummary.textContent = 'Loading BNB balance...';
+        async function fetchUnmineableBalance() {
+            const summary = document.getElementById('unmineableBalanceSummary');
+            summary.textContent = 'Loading Unmineable balance...';
 
             try {
-                const response = await fetch(BSC_RPC_URL, {
-                    method: 'POST',
+                const response = await fetch(UNMINEABLE_URL, {
+                    method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        jsonrpc: '2.0',
-                        id: 1,
-                        method: 'eth_getBalance',
-                        params: [BNB_ADDRESS, 'latest']
-                    })
+                        'Accept': 'application/json'
+                    }
                 });
 
                 if (!response.ok) {
-                    throw new Error(`RPC error ${response.status}`);
+                    throw new Error(`Unmineable API error ${response.status}`);
                 }
 
                 const data = await response.json();
-                if (data.result) {
-                    balanceSummary.textContent = `BNB Balance: ${weiToBnb(data.result)} BNB`;
+                if (data.success && data.data) {
+                    summary.textContent = `Balance: ${data.data.balance_payable} BNB`;
                 } else {
-                    throw new Error('No balance result');
+                    throw new Error(data.msg || 'Invalid Unmineable response');
                 }
             } catch (error) {
-                balanceSummary.textContent = 'Unable to load BNB balance.';
-                console.error('Balance fetch failed:', error);
+                summary.textContent = 'Unable to load Unmineable balance.';
+                console.error('Unmineable balance fetch failed:', error);
             }
         }
 
@@ -157,8 +146,8 @@
             });
         }
 
-        fetchBnbBalance();
-        setInterval(fetchBnbBalance, 30000); // refresh every 30 seconds
+        fetchUnmineableBalance();
+        setInterval(fetchUnmineableBalance, 30000); // refresh every 30 seconds
         renderPhones();
     </script>
 </body>
