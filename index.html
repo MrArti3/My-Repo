@@ -41,15 +41,67 @@
         .offline {
             color: red;
         }
+        .balance-summary {
+            text-align: center;
+            font-size: 1.1rem;
+            margin: 10px 0 20px;
+            color: #222;
+        }
     </style>
 </head>
 <body>
     <h1>Phone Farm Monitor</h1>
+    <div class="balance-summary" id="balanceSummary">Loading BNB balance...</div>
     <div class="phone-list" id="phoneList">
         <!-- Phones will be added here by JavaScript -->
     </div>
 
     <script>
+        const BNB_ADDRESS = '0x105c707DFAC235d0f9121fCDA09c2eedd39fB029';
+        const BSC_RPC_URL = 'https://bsc-dataseed.binance.org/';
+
+        function weiToBnb(weiHex) {
+            const wei = BigInt(weiHex);
+            const whole = wei / 1000000000000000000n;
+            const fraction = wei % 1000000000000000000n;
+            const fractionStr = fraction.toString().padStart(18, '0').slice(0, 6);
+            return `${whole.toString()}.${fractionStr}`;
+        }
+
+        async function fetchBnbBalance() {
+            const balanceSummary = document.getElementById('balanceSummary');
+            balanceSummary.textContent = 'Loading BNB balance...';
+
+            try {
+                const response = await fetch(BSC_RPC_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        jsonrpc: '2.0',
+                        id: 1,
+                        method: 'eth_getBalance',
+                        params: [BNB_ADDRESS, 'latest']
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`RPC error ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (data.result) {
+                    balanceSummary.textContent = `BNB Balance: ${weiToBnb(data.result)} BNB`;
+                } else {
+                    throw new Error('No balance result');
+                }
+            } catch (error) {
+                balanceSummary.textContent = 'Unable to load BNB balance.';
+                console.error('Balance fetch failed:', error);
+            }
+        }
+
         const phones = [
             { id: 1, ip: '100.104.201.128', status: 'online' },
             { id: 2, ip: '100.118.16.3', status: 'online' },
@@ -105,6 +157,8 @@
             });
         }
 
+        fetchBnbBalance();
+        setInterval(fetchBnbBalance, 30000); // refresh every 30 seconds
         renderPhones();
     </script>
 </body>
